@@ -633,10 +633,6 @@ function buildPage(folium, container, ctx) {
     msg.textContent = text || '';
     msg.className = 'msg' + (kind ? ' ' + kind : '');
   };
-  const setFolderMsg = (text, kind) => {
-    folderMsg.textContent = text || '';
-    folderMsg.className = 'msg' + (kind ? ' ' + kind : '');
-  };
 
   const updateFileLine = () => {
     if (!pickedFiles.length) {
