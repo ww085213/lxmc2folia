@@ -262,7 +262,7 @@ export function nameFromFileName(fileName) {
 // ---------------------------------------------------------------------------
 
 const CSS = `
-.lxmc2folia { box-sizing: border-box; height: 100%; overflow: auto; padding: 28px; font: 14px/1.7 var(--folium-font, "Microsoft YaHei", system-ui, sans-serif); color: inherit; }
+.lxmc2folia { box-sizing: border-box; height: 100%; overflow: auto; padding: 28px 28px 120px; font: 14px/1.7 var(--folium-font, "Microsoft YaHei", system-ui, sans-serif); color: inherit; }
 .lxmc2folia * { box-sizing: border-box; }
 .lxmc2folia .wrap { max-width: 920px; margin: 0 auto; }
 .lxmc2folia h1 { margin: 0 0 4px; font-size: 22px; }
