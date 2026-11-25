@@ -542,6 +542,24 @@ const CSS = `
 }
 `;
 
+/** 读宿主背景亮度，决定用深色还是浅色配色（跟着 Folia 的主题走）。 */
+function detectHostPalette() {
+  try {
+    const parse = (color) => {
+      const match = /rgba?\(\s*(\d+)[,\s]+(\d+)[,\s]+(\d+)/.exec(color || '');
+      if (!match) return null;
+      return (0.2126 * Number(match[1]) + 0.7152 * Number(match[2]) + 0.0722 * Number(match[3])) / 255;
+    };
+    for (const element of [document.body, document.documentElement]) {
+      if (!element) continue;
+      const luminance = parse(getComputedStyle(element).backgroundColor || '');
+      if (luminance === null) continue;
+      return luminance > 0.5 ? 'light' : 'dark';
+    }
+  } catch (error) { /* ignore */ }
+  return 'dark';
+}
+
 function buildPage(folium, container, ctx) {
   const zh = String((ctx && ctx.locale) || navigator.language || '').toLowerCase().startsWith('zh');
   const t = (zhText, enText) => (zh ? zhText : enText);
