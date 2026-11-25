@@ -656,7 +656,14 @@ function buildPage(folium, container, ctx) {
     setMsg('');
   };
 
-  drop.addEventListener('click', () => picker.click());
+  // 点击拖拽区打开文件选择。input 在 drop 里面，程序化 click 的事件会冒泡回 drop，
+  // 必须先把这类冒泡事件挡掉，否则会自己触发自己直到栈溢出（表现为“点了没反应/报错”）。
+  drop.addEventListener('click', (event) => {
+    if (event.target === picker) return;
+    event.preventDefault();
+    picker.value = '';
+    picker.click();
+  });
   drop.addEventListener('dragover', (event) => { event.preventDefault(); drop.classList.add('hover'); });
   drop.addEventListener('dragleave', () => drop.classList.remove('hover'));
   drop.addEventListener('drop', (event) => {
